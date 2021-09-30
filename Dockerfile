@@ -7,7 +7,6 @@ RUN yarn install --frozen-lockfile
 FROM node:lts-alpine AS builder
 WORKDIR /app
 COPY . .
-ENV SKIP_PREFLIGHT_CHECK true
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN yarn build
 
