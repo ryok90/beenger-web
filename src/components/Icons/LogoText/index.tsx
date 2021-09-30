@@ -1,9 +1,14 @@
-import { Box, BoxProps } from '@chakra-ui/layout'
+import { AspectRatio, BoxProps } from '@chakra-ui/layout'
 
 export type IconLogoTextProps = BoxProps
 
 export const IconLogoText = (props: IconLogoTextProps) => (
-  <Box w="14.4375em" h="5em" {...props} color={props.color ?? '#FBBB1B'}>
+  <AspectRatio
+    w="14em"
+    ratio={231 / 80}
+    {...props}
+    color={props.color ?? '#FBBB1B'}
+  >
     <svg
       width="100%"
       height="100%"
@@ -29,5 +34,5 @@ export const IconLogoText = (props: IconLogoTextProps) => (
         fill="currentColor"
       />
     </svg>
-  </Box>
+  </AspectRatio>
 )
