@@ -1,5 +1,5 @@
 import { Center, VStack } from '@chakra-ui/layout'
-import { IconLogo, IconLogoText } from 'components/Icons'
+import { IconLogo, IconLogoText } from './components/Icons'
 
 function App() {
   return (
