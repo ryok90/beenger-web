@@ -1,10 +1,11 @@
+import { customRender } from '@/utils/test-utils'
+import { screen } from '@testing-library/dom'
 import { MemoryRouter } from 'react-router'
-import { render, screen } from 'utils/test-utils'
 import { IconLogo, IconLogoText } from '.'
 
 describe('Icons Tests', () => {
   it('should render all the icons with default props', () => {
-    render(
+    customRender(
       <>
         <IconLogo />
         <IconLogoText />

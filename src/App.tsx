@@ -1,14 +1,13 @@
-import { Center, VStack } from '@chakra-ui/layout'
-import { IconLogo, IconLogoText } from './components/Icons'
+import { BrowserRouter } from 'react-router-dom'
+import { Routes } from './routes'
+import { Fonts } from './styles/fonts'
 
 function App() {
   return (
-    <Center bgColor="#282828" h="100vh">
-      <VStack alignItems="center" spacing="20">
-        <IconLogo w="5em" />
-        <IconLogoText />
-      </VStack>
-    </Center>
+    <BrowserRouter>
+      <Fonts />
+      <Routes />
+    </BrowserRouter>
   )
 }
 
