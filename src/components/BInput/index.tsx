@@ -10,9 +10,11 @@ import {
   InputGroup,
   InputLeftElement,
   InputProps,
-  InputRightElement
+  InputRightElement,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { forwardRef, HTMLInputTypeAttribute } from 'react'
+import { MdWarning } from 'react-icons/md'
 import ReactInputMask from 'react-input-mask'
 
 type CustomProps = {
@@ -72,18 +74,19 @@ export const BInput = forwardRef<HTMLInputElement, BInputProps>(
             id={name}
             name={name}
             placeholder={placeholder}
-            _placeholder={{
-              color: 'neutral.500'
-            }}
+            _placeholder={{ color: 'neutral.400' }}
+            errorBorderColor="danger.500"
             ref={ref}
             type={type}
-            fontSize="lg"
-            color="neutral.600"
-            border="1px solid"
+            fontSize={{ base: 'xs', sm: 'xl' }}
+            fontWeight="normal"
+            color={useColorModeValue('neutral.500', 'neutral.100')}
+            border={errorMessage ? 'none' : '1px solid'}
             borderColor="primary.500"
+            shadow="none"
             borderRadius="none"
             padding="2"
-            height="10"
+            height={{ base: 9, sm: 10 }}
             _focus={{
               outline: 'none',
               borderColor: 'primary.500'
@@ -96,12 +99,18 @@ export const BInput = forwardRef<HTMLInputElement, BInputProps>(
         </InputGroup>
         <Box
           borderTop="6px solid"
-          borderColor={inputProps?.borderColor ?? 'primary.500'}
+          borderColor={errorMessage ? 'danger.500' : 'primary.500'}
           borderLeft="6px solid transparent"
           borderRight="6px solid transparent"
         />
-        <FormErrorMessage {...formErrorMessage}>
-          {errorMessage}
+        <FormErrorMessage
+          position="absolute"
+          top={{ base: 9, sm: '2.875rem' }}
+          color="danger.500"
+          {...formErrorMessage}
+        >
+          <MdWarning width="6px" />
+          &nbsp;{errorMessage}
         </FormErrorMessage>
         {!errorMessage && <FormErrorMessage>{helperMessage}</FormErrorMessage>}
       </FormControl>

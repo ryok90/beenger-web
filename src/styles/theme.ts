@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
 
 const customTheme = {
+  useSystemColorMode: true,
   colors: {
     primary: {
       '100': '#FCF4CE',
@@ -52,6 +53,13 @@ const customTheme = {
     body: "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
     heading:
       "Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
+  },
+  components: {
+    Button: {
+      baseStyle: {
+        _focus: { boxShadow: 'none' }
+      }
+    }
   }
 }
 

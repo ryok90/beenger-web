@@ -22,12 +22,12 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
-    "**/stories.tsx",
-    "**/mock.ts(x)?"
+    "./src/**/stories.tsx",
+    "./src/**/mock.ts(x)?"
   ]
 }
