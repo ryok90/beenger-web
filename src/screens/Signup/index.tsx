@@ -133,7 +133,10 @@ export const Signup = () => {
         />
         <VStack w="full">
           <BButton isLoading={isSubmitting} type="submit" label="Cadastrar" />
-          <Text color={useColorModeValue('neutral.400', 'neutral.300')}>
+          <Text
+            fontSize={{ base: 'xs', sm: 'lg' }}
+            color={useColorModeValue('neutral.400', 'neutral.300')}
+          >
             Já tem cadastro?{' '}
             <Link to="/">
               <Text as="span" textDecorationLine="underline">
