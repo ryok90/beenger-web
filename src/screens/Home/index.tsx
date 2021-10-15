@@ -10,7 +10,7 @@ export const Home = () => {
         <IconLogo w="20" />
         <IconLogoText />
         <Link to="/signup">
-          <BButton w="10rem" as="a" label="Login" />
+          <BButton w="10rem" as="a" label="Signup" />
         </Link>
       </VStack>
     </Center>

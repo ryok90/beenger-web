@@ -59,6 +59,8 @@ export const BInput = forwardRef<HTMLInputElement, BInputProps>(
     },
     ref
   ) => {
+    const borderColor = useColorModeValue('primary.500', 'primary.600')
+
     return (
       <FormControl {...props} {...formControlProps}>
         {label && (
@@ -81,8 +83,8 @@ export const BInput = forwardRef<HTMLInputElement, BInputProps>(
             fontSize={{ base: 'xs', sm: 'xl' }}
             fontWeight="normal"
             color={useColorModeValue('neutral.500', 'neutral.100')}
-            border={errorMessage ? 'none' : '1px solid'}
-            borderColor="primary.500"
+            border={'1px solid'}
+            borderColor={borderColor}
             shadow="none"
             borderRadius="none"
             padding="2"
@@ -90,6 +92,10 @@ export const BInput = forwardRef<HTMLInputElement, BInputProps>(
             _focus={{
               outline: 'none',
               borderColor: 'primary.500'
+            }}
+            _invalid={{
+              boxShadow: 'none',
+              borderColor: 'danger.500'
             }}
             {...inputProps}
           />
@@ -99,7 +105,7 @@ export const BInput = forwardRef<HTMLInputElement, BInputProps>(
         </InputGroup>
         <Box
           borderTop="6px solid"
-          borderColor={errorMessage ? 'danger.500' : 'primary.500'}
+          borderColor={errorMessage ? 'danger.500' : borderColor}
           borderLeft="6px solid transparent"
           borderRight="6px solid transparent"
         />

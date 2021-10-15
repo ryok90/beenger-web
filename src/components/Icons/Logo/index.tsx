@@ -1,3 +1,4 @@
+import { useColorModeValue } from '@chakra-ui/color-mode'
 import { AspectRatio, BoxProps } from '@chakra-ui/layout'
 
 export type IconLogoProps = BoxProps
@@ -6,8 +7,8 @@ export const IconLogo = (props: IconLogoProps) => (
   <AspectRatio
     w="5em"
     ratio={1}
+    color={useColorModeValue('primary.500', 'primary.600')}
     {...props}
-    color={props.color ?? 'primary.500'}
     data-testid="icon-logo"
   >
     <svg
