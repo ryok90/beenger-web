@@ -1,16 +1,16 @@
 import { Route, Switch } from 'react-router'
 import { Home } from './screens/Home'
-import { Signup } from './screens/Signup'
+import { SignUp } from './screens/SignUp'
 
 export const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path={RoutesEnum.signup} component={Signup} />
+      <Route path={RoutesEnum.signUp} component={SignUp} />
     </Switch>
   )
 }
 
 export enum RoutesEnum {
-  signup = '/signup'
+  signUp = '/sign-up'
 }

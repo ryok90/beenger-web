@@ -54,7 +54,7 @@ const schema = Joi.object({
     })
 })
 
-export const Signup = () => {
+export const SignUp = () => {
   const breakpoint = useBreakpointValue({ base: false, sm: true })
   const [visible, { toggle }] = useBoolean()
   const { toggleColorMode } = useColorMode()
