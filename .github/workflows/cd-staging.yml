@@ -16,27 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+      # - name: Login to GitHub Container Registry
+      #   uses: docker/login-action@v1
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.repository_owner }}
+      #     password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build and push image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/ryok90/${{ env.IMAGE_NAME }}:latest
+      # - name: Build and push image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: ghcr.io/ryok90/${{ env.IMAGE_NAME }}:latest
 
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: v
-          create_annotated_tag: true
+          release_branches: [ develop ]
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
@@ -45,21 +44,21 @@ jobs:
           name: ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
 
-  deploy:
-    needs: build_push
-    name: Deploy to Server
-    runs-on: ubuntu-latest
-    steps:
-      - name: SSH to pull image and run
-        uses: appleboy/ssh-action@master
-        with:
-          host: staging.beenger.com
-          username: root
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            echo "${{ secrets.ENV_STAGING }}" > .env.${{ env.IMAGE_NAME }}
-            docker pull ghcr.io/ryok90/${{ env.IMAGE_NAME }}:latest
-            docker stop ${{ env.IMAGE_NAME }}
-            docker rm ${{ env.IMAGE_NAME }}
-            docker run --env-file=.env.${{ env.IMAGE_NAME }} -p 3021:80 --name ${{ env.IMAGE_NAME }} -d ghcr.io/ryok90/${{ env.IMAGE_NAME }}
-            docker image prune -f
+  # deploy:
+  #   needs: build_push
+  #   name: Deploy to Server
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: SSH to pull image and run
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: staging.beenger.com
+  #         username: root
+  #         key: ${{ secrets.SSH_KEY }}
+  #         script: |
+  #           echo "${{ secrets.ENV_STAGING }}" > .env.${{ env.IMAGE_NAME }}
+  #           docker pull ghcr.io/ryok90/${{ env.IMAGE_NAME }}:latest
+  #           docker stop ${{ env.IMAGE_NAME }}
+  #           docker rm ${{ env.IMAGE_NAME }}
+  #           docker run --env-file=.env.${{ env.IMAGE_NAME }} -p 3021:80 --name ${{ env.IMAGE_NAME }} -d ghcr.io/ryok90/${{ env.IMAGE_NAME }}
+  #           docker image prune -f
