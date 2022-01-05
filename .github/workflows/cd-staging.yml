@@ -44,6 +44,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           publish: true
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          version: ${{ steps.tag_version.outputs.new_version }}
 
   deploy:
     needs: build_push
